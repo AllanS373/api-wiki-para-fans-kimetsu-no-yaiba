@@ -1,11 +1,7 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 import json
-from handlers.kimetsu_api import KimetsuAPI
 
-# Porta onde o servidor vai rodar
-PORT = 8080
-
-# Base de dados (pode ser substituída por um banco de dados real mais tarde)
+# Dados simulados (deveriam ser carregados de arquivos ou um banco de dados)
 personagens = [
     {'id': 1, 'nome': 'Tanjiro Kamado', 'habilidades': ['Respiração da Água', 'Respiração do Sol'], 'afiliacao': "Corporação dos Caçadores de Oni's"},
     {'id': 2, 'nome': 'Nezuko Kamado', 'habilidades': ['Sangue Explosivo'], 'afiliacao': "Corporação dos Caçadores de Oni's"}
@@ -23,48 +19,38 @@ arcos = [
     {'id': 9, 'nome': 'Vila dos Ferreiros'},
     {'id': 10, 'nome': 'Treinamento dos Hashiras'},
     {'id': 11, 'nome': 'Castelo infinito'},
-    {'id': 12, 'nome': 'Contagem regressiva pelo nascer do sol'},
+    {'id': 12, 'nome': 'Contagem regressiva pelo nascer do sol'}
 ]
 
-# Classe que lida com as requisições
 class KimetsuAPI(BaseHTTPRequestHandler):
-
-    # Função para buscar personagem por ID
     def buscar_personagem_por_id(self, id):
-        # Busca pelo personagem com o ID especificado
         for personagem in personagens:
             if personagem['id'] == id:
                 return personagem
         return None
-    # Função para buscar arco por ID
+
     def buscar_arco_por_id(self, id):
         for arco in arcos:
             if arco['id'] == id:
                 return arco
-            return None
+        return None
 
-    # Método GET (quando o cliente faz uma requisição GET)
     def do_GET(self):
-        # Se for a rota para buscar todos os personagens
         if self.path == '/personagens':
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             response = json.dumps(personagens)
             self.wfile.write(response.encode())
-        
-        # Se a rota incluir um ID, como /personagens/1
+
         elif self.path.startswith('/personagens/'):
-            # Extraindo o ID da rota
             try:
                 personagem_id = int(self.path.split('/')[-1])
             except ValueError:
                 self.send_error(400, "ID inválido")
                 return
-            
-            # Buscando o personagem pelo ID
+
             personagem = self.buscar_personagem_por_id(personagem_id)
-            
             if personagem:
                 self.send_response(200)
                 self.send_header("Content-type", "application/json")
@@ -74,99 +60,73 @@ class KimetsuAPI(BaseHTTPRequestHandler):
             else:
                 self.send_error(404, "Personagem não encontrado")
 
-
         elif self.path == '/arcos':
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             response = json.dumps(arcos)
             self.wfile.write(response.encode())
-            
-        elif self.path.startswith('/arcos/'):
 
+        elif self.path.startswith('/arcos/'):
             try:
                 arco_id = int(self.path.split('/')[-1])
             except ValueError:
                 self.send_error(400, "ID inválido")
                 return
-                
-            arco = self.buscar_arco_por_id(arco_id)
 
-            if arco :
+            arco = self.buscar_arco_por_id(arco_id)
+            if arco:
                 self.send_response(200)
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
                 response = json.dumps(arco)
                 self.wfile.write(response.encode())
-                
             else:
                 self.send_error(404, "Arco não encontrado")
 
-            # Se a rota não for válida
         else:
             self.send_error(404, "Rota não encontrada")
 
-        # Método POST (quando o cliente faz uma requisição POST)
     def do_POST(self):
         if self.path == '/personagens':
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-                
             try:
                 novo_personagem = json.loads(post_data)
                 novo_personagem['id'] = len(personagens) + 1
                 personagens.append(novo_personagem)
-
                 self.send_response(201)
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
                 response = json.dumps(novo_personagem)
                 self.wfile.write(response.encode())
-            
             except json.JSONDecodeError:
                 self.send_error(400, "Erro de formato no corpo da requisição")
 
         elif self.path.startswith('/personagens/'):
-            
             try:
                 personagem_id = int(self.path.split('/')[-1])
             except ValueError:
                 self.send_error(400, "ID inválido")
                 return
-            
-            personagem = next((p for p in personagens if p['id'] == personagem_id), None)
 
+            personagem = next((p for p in personagens if p['id'] == personagem_id), None)
             if personagem is None:
                 self.send_error(404, "Personagem não encontrado")
                 return
-            
+
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-
             try:
-                
                 dados_atualizados = json.loads(post_data)
                 personagem.update(dados_atualizados)
-
                 self.send_response(200)
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
                 response = json.dumps(personagem)
                 self.wfile.write(response.encode())
-            
             except json.JSONDecodeError:
                 self.send_error(400, "Erro de formato no corpo da requisição")
 
         else:
             self.send_error(404, "Rota não encontrada")
-
-# Função que inicia o servidor
-def run():
-    server_address = ('', PORT)
-    httpd = HTTPServer(server_address, KimetsuAPI)
-    print(f'Servindo na porta {PORT}...')
-    httpd.serve_forever()
-
-# Iniciar o servidor
-if __name__ == '__main__':
-    run()
