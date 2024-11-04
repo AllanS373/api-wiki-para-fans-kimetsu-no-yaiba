@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "Seleção final",
+        "description": "Tanjiro passa por um teste brutal para se tornar um Demon Slayer."
+    },
+    {
+        "id": 2,
+        "name": "Primeira missão",
+        "description": "Tanjiro e Nezuko enfrentam seu primeiro demônio na cidade."
+    },
+    {
+        "id": 3,
+        "name": "Asakusa",
+        "description": "Tanjiro encontra Muzan Kibutsuji e descobre mais sobre os demônios."
+    },
+    {
+        "id": 4,
+        "name": "Mansão Tsuzumi",
+        "description": "Tanjiro e seus amigos lutam contra demônios em uma mansão misteriosa."
+    },
+    {
+        "id": 5,
+        "name": "Montanha Natagumo",
+        "description": "A batalha na Montanha Natagumo contra a família de demônios aranha."
+    },
+    {
+        "id": 6,
+        "name": "Reabilitação e treinamento",
+        "description": "Tanjiro e seus amigos se recuperam e treinam para futuras batalhas."
+    },
+    {
+        "id": 7,
+        "name": "Trem infinito",
+        "description": "Tanjiro e seus amigos enfrentam demônios em um trem em movimento."
+    },
+    {
+        "id": 8,
+        "name": "Distrito do Entretenimento",
+        "description": "A investigação no distrito vermelho e a luta contra os demônios."
+    },
+    {
+        "id": 9,
+        "name": "Vila dos Ferreiros",
+        "description": "Tanjiro vai à Vila dos Ferreiros para reparar sua espada."
+    },
+    {
+        "id": 10,
+        "name": "Treinamento dos Hashiras",
+        "description": "O treinamento intensivo sob a supervisão dos Hashiras."
+    },
+    {
+        "id": 11,
+        "name": "Castelo infinito",
+        "description": "A batalha final contra Muzan no Castelo Infinito."
+    },
+    {
+        "id": 12,
+        "name": "Contagem regressiva pelo nascer do sol",
+        "description": "A luta para sobreviver até o nascer do sol e derrotar Muzan."
+    }
+]

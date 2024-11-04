@@ -1,0 +1,61 @@
+[
+    {
+        "id": 1,
+        "name": "Tanjiro Kamado",
+        "skills": [
+            "Water Breathing",
+            "Sun Breathing"
+        ],
+        "age": 15,
+        "description": "A kind-hearted boy with a keen sense of smell",
+        "affiliation": "Demon Slayer Corps"
+    },
+    {
+        "id": 2,
+        "name": "Nezuko Kamado",
+        "skills": [
+            "Demon Blood Art"
+        ],
+        "age": 14,
+        "description": "Tanjiro's younger sister turned demon",
+        "affiliation": "Demon Slayer Corps"
+    },
+    {
+        "id": 3,
+        "name": "Zenitsu Agatsuma",
+        "skills": [
+            "Thunder Breathing"
+        ],
+        "age": 16,
+        "description": "A cowardly boy who can unleash incredible power when asleep",
+        "affiliation": "Demon Slayer Corps"
+    },
+    {
+        "id": 4,
+        "name": "Inosuke Hashibira",
+        "skills": [
+            "Beast Breathing"
+        ],
+        "age": 15,
+        "description": "A wild and aggressive boy raised by boars",
+        "affiliation": "Demon Slayer Corps"
+    },
+    {
+        "id": 5,
+        "name": "Kanao Tsuyuri",
+        "skills": [
+            "Flower Breathing"
+        ],
+        "age": 16,
+        "description": "A quiet girl with a tragic past and a strong sense of duty",
+        "affiliation": "Demon Slayer Corps"
+    },
+    {
+        "id": 6,
+        "name": "batatinha",
+        "skills": "Besta enjaulada",
+        "age": 24,
+        "description": "foda",
+        "affiliation": "gugu"
+    }
+]
